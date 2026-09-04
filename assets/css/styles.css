@@ -641,6 +641,18 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 .entry__lede::after{ content:'「'; color:var(--ink-faint); }
 .entry__lede::after{ content:'」'; }
 
+/* 配图 */
+.entry__fig{ margin:0 0 clamp(2.8rem,6vh,4.2rem); }
+.entry__fig img{
+  width:100%; height:auto;
+  filter:saturate(.72) contrast(1.03);
+  mask-image:linear-gradient(180deg,transparent,#000 6%,#000 94%,transparent);
+}
+.entry__fig figcaption{
+  margin-top:1rem; text-align:right;
+  font-size:.74rem; letter-spacing:.14em; color:var(--ink-faint);
+}
+
 /* 两栏 */
 .entry__body{
   display:grid; grid-template-columns:minmax(0,1fr) 268px;

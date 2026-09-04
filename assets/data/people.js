@@ -9,7 +9,6 @@ window.WY_PEOPLE = {
     dates: '1130—1200',
     kind: '宋 · 理学',
     lede: '他一生几乎没在婺源住过，可婺源却因他成了「书乡」。',
-    hero: 'assets/images/people.png',
     sections: [
       {
         t: '身世',

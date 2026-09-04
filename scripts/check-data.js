@@ -56,6 +56,24 @@ ids.forEach((id) => {
     if (!REG[rc] || !REG[rc][rs]) problems.push(`${id}: related 指向不存在的条目 ${rid}`);
     if (rid === id) problems.push(`${id}: related 指向了自己`);
   });
+
+  if (e.hero) {
+    if (!fs.existsSync(path.join(root, e.hero))) {
+      problems.push(`${id}: hero 指向的图片不存在 → ${e.hero}`);
+    }
+    if (!e.heroCap) problems.push(`${id}: 有 hero 但缺图说 heroCap`);
+    if (!e.heroAlt) problems.push(`${id}: 有 hero 但缺替代文本 heroAlt`);
+
+    // 图说紧接导语显示，两者高度重复会显得冗余
+    const strip = (s) => String(s || '').replace(/[，。；、「」\u2014\s]/g, '');
+    if (e.heroCap && e.lede) {
+      const a = strip(e.heroCap);
+      const b = strip(e.lede);
+      if (a === b || a.includes(b) || b.includes(a)) {
+        problems.push(`${id}: heroCap 与 lede 重复 → ${e.heroCap}`);
+      }
+    }
+  }
 });
 
 // 首页链接与数据键名是否对得上
@@ -68,8 +86,14 @@ ids.forEach((id) => {
   if (!linked.includes(id)) problems.push(`条目 ${id} 在首页没有入口`);
 });
 
-console.log(`条目总数 ${ids.length}　首页入口 ${linked.length}`);
+const withHero = ids.filter((id) => {
+  const [c, s] = id.split('.');
+  return !!REG[c][s].hero;
+});
+
+console.log(`条目总数 ${ids.length}　首页入口 ${linked.length}　配图 ${withHero.length}　无图 ${ids.length - withHero.length}`);
 console.log(ids.join('  '));
+console.log('配图条目：' + withHero.join('  '));
 if (problems.length) {
   console.log('\n发现 ' + problems.length + ' 处问题：');
   problems.forEach((p) => console.log('  · ' + p));

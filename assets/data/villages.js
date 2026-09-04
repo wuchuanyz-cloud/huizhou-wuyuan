@@ -9,6 +9,9 @@ window.WY_VILLAGES = {
     dates: '北宋 · 建村',
     kind: '古村 · 秋口镇',
     lede: '一条溪从村头流到村尾，两岸的日子就沿着水排开。',
+    hero: 'assets/images/village-likeng.webp',
+    heroCap: '溪贯全村，桥密如常物；河埠既是洗衣处，也是村子的客厅',
+    heroAlt: '水墨画：溪流穿村而过，两岸粉墙马头墙，数座石桥横跨，妇人在河埠洗衣',
     sections: [
       {
         t: '格局',
@@ -56,6 +59,9 @@ window.WY_VILLAGES = {
     dates: '北宋大观年间 · 建村',
     kind: '古村 · 江湾镇',
     lede: '两条河在这里汇合，于是这里成了埠头；埠头有了钱，就有了那座祠堂。',
+    hero: 'assets/images/village-wangkou.webp',
+    heroCap: '两水在此合流，村沿岸展开；祠堂的屋顶从民居中高出来',
+    heroAlt: '水墨画：两河汇流处的徽州村落，石砌码头停着货船，岸上民居连绵，宗祠屋顶居中而起',
     sections: [
       {
         t: '水口成埠',
@@ -103,6 +109,9 @@ window.WY_VILLAGES = {
     dates: '明清 · 官宅村',
     kind: '古村 · 沱川乡',
     lede: '一个山坳里的村子，门楣上挂着「理学渊源」四个字。',
+    hero: 'assets/images/village-liyuan.webp',
+    heroCap: '山坳深处，高门大户挨着排开，门楼一座比一座讲究',
+    heroAlt: '水墨画：深山谷地中的徽州官宅村，高大砖雕门楼与马头墙沿石巷密集排列，四面山峦合围',
     sections: [
       {
         t: '书与官',
@@ -150,6 +159,9 @@ window.WY_VILLAGES = {
     dates: '明清 · 商宅群',
     kind: '古村 · 思口镇',
     lede: '这里的门楼上不刻花鸟，刻的是一个变形的「商」字。',
+    hero: 'assets/images/village-sixiyancun.webp',
+    heroCap: '门面不能逾制，于是把体面全刻进门楼的层层砖雕里',
+    heroAlt: '水墨画：徽商宅第门楼近景，多层砖雕门罩之下是石门框与铜环木门，巷中另一座门楼渐远',
     sections: [
       {
         t: '两村一体',
@@ -197,6 +209,9 @@ window.WY_VILLAGES = {
     dates: '唐末 · 萧江改姓',
     kind: '古村 · 江湾镇',
     lede: '这村里的江姓，一千年前姓萧。',
+    hero: 'assets/images/village-jiangwan.webp',
+    heroCap: '三面环山，一水绕村；格局比别处都舒展',
+    heroAlt: '水墨画：三面山峦环抱、一水绕流的徽州村落，屋舍舒展分布，宗祠居中，远山隐入雾中',
     sections: [
       {
         t: '萧江氏',
@@ -243,6 +258,9 @@ window.WY_VILLAGES = {
     dates: '明代 · 曹氏建村',
     kind: '古村 · 江湾镇',
     lede: '整个村子挂在半山腰上，屋顶就是晒场。',
+    hero: 'assets/images/village-huangling.webp',
+    heroCap: '木杆从窗口伸出去，晒盘架在半空——地无平处，只能上房',
+    heroAlt: '水墨画：依陡坡层叠而建的山村，木杆自窗口伸出架起竹编晒盘，盘中辣椒玉米皇菊晾晒，山下梯田入雾',
     sections: [
       {
         t: '挂在山上的村子',
@@ -290,6 +308,9 @@ window.WY_VILLAGES = {
     dates: '南宋 · 廊桥',
     kind: '古桥 · 清华镇',
     lede: '桥上有屋顶，所以走过它的人不必赶路。',
+    hero: 'assets/images/village-hongqiao.webp',
+    heroCap: '石墩的迎水面砌成船头，用以分水破流；上游石堰拦出一片静水',
+    heroAlt: '水墨画：横跨宽阔水面的古廊桥，数座石墩迎水面砌成尖角分水，桥面覆长廊与亭，上游石堰拦出静水与倒影',
     sections: [
       {
         t: '一座廊桥',
@@ -339,6 +360,9 @@ window.WY_VILLAGES = {
     dates: '唐 · 建村',
     kind: '古村 · 江湾镇',
     lede: '一村的古樟，树龄比村里任何一栋房子都长。',
+    hero: 'assets/images/village-xiaoqi.webp',
+    heroCap: '水口种树，一为固土，二为聚气，三为标示村界，久之成林',
+    heroAlt: '水墨画：石板路通入村口，数株巨大古樟枝干盘曲、树冠如盖，白墙黑瓦的屋舍在树荫后隐现',
     sections: [
       {
         t: '上下两村',

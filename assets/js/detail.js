@@ -44,6 +44,14 @@ function renderSections(sections) {
   );
 }
 
+function renderHero(entry) {
+  if (!entry.hero) return null;
+  return el('figure', { class: 'entry__fig' }, [
+    el('img', { src: entry.hero, alt: entry.heroAlt || entry.name }),
+    entry.heroCap ? el('figcaption', { text: entry.heroCap }) : null
+  ]);
+}
+
 function renderCaveats(caveats) {
   if (!caveats || !caveats.length) return null;
   return el('section', { class: 'caveats' }, [
@@ -147,7 +155,7 @@ function renderEntry(hit) {
   renderNav(category, slug);
 
   return el('article', { class: 'entry' }, [
-    el('div', { class: 'wrap wrap--entry' }, [head, body])
+    el('div', { class: 'wrap wrap--entry' }, [head, renderHero(entry), body])
   ]);
 }
 
