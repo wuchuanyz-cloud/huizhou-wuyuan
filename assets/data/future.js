@@ -115,6 +115,9 @@ window.WY_FUTURE = {
     dates: '待解之问',
     kind: '未来 · 取舍',
     lede: '修一栋老宅，贵的不是砖瓦，是会做这活的人。',
+    hero: 'assets/images/future-baohu.webp',
+    heroCap: '木槌、凿子、摊开的工具；砖雕补缺，快不了',
+    heroAlt: '水墨画：老匠人双手持木槌与凿子修补砖雕门罩的缺口，台面上摊着不同宽度的凿、刷子与木方，砖屑散落',
     sections: [
       {
         t: '一栋老宅的修缮账',

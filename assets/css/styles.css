@@ -630,6 +630,23 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 .topic:hover::after,
 .topic:focus-visible::after{ opacity:1; transform:none; }
 
+/* 带缩略图的条目 */
+.topic--fig .topic__body{ padding-right:1.2rem; }
+.topic__fig{
+  flex:none; width:clamp(180px,22vw,252px);
+  align-self:flex-start; overflow:hidden;
+}
+.topic__fig img{
+  width:100%; aspect-ratio:4/3; object-fit:cover;
+  filter:saturate(.72) contrast(1.03);
+  transition:transform .8s var(--ease);
+}
+.topic--fig:hover .topic__fig img{ transform:scale(1.04); }
+.topic--fig::after{
+  top:auto;
+  bottom:calc(clamp(1.5rem,3vw,2.1rem) - .3rem);
+}
+
 /* 详情页侧栏 · 出处 */
 .sources li{
   position:relative; padding-left:.9rem; margin-bottom:.7rem;
@@ -643,6 +660,9 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 @media (max-width:600px){
   .topic{ flex-wrap:wrap; }
   .topic__body{ padding-right:0; }
+  .topic--fig .topic__body{ padding-right:0; }
+  .topic__fig{ width:100%; margin-top:1.1rem; }
+  .topic__fig img{ aspect-ratio:21/9; }
   .topic::after{ display:none; }
 }
 

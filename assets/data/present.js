@@ -11,6 +11,9 @@ window.WY_PRESENT = {
     dates: '2015—今',
     kind: '交通 · 铁路',
     lede: '二〇一五年之前，出婺源得先坐几个钟头的汽车。',
+    hero: 'assets/images/now-jiaotong.webp',
+    heroCap: '高架桥跨过花田，桥下是白墙黛瓦；婺源的铁轨从二〇一五年才有',
+    heroAlt: '水墨画：白色高铁列车驶过跨越山谷的高架桥，桥下油菜花梯田与徽派村落，远山隐入雾中',
     sections: [
       {
         t: '出山',
@@ -64,6 +67,9 @@ window.WY_PRESENT = {
     dates: '近十年',
     kind: '交通 · 公路',
     lede: '公路的标线一般只有黄白两色。这条路上有四色。',
+    hero: 'assets/images/now-gonglu.webp',
+    heroCap: '黄白红蓝四条线顺着 S 弯缠上山，观景台设在弯道外侧',
+    heroAlt: '水墨画：盘山公路呈 S 形绕过林坡，路面四色标线随弯道延伸，弯道外侧设木构观景台，坡下为茶园与花田',
     sections: [
       {
         t: '四条线',
@@ -238,6 +244,9 @@ window.WY_PRESENT = {
     dates: '2025 年数据',
     kind: '旅游 · 规模',
     lede: '一个三十万人的县，一年接待三千六百万人。',
+    hero: 'assets/images/now-lvyou.webp',
+    heroCap: '梯田层层，雾未散时最好；赶晨雾的人天没亮就上了山',
+    heroAlt: '水墨画：清晨的油菜花梯田层层绕山，谷中浓雾只露出屋顶，山脊小径上有架三脚架与写生的人影',
     sections: [
       {
         t: '两个短窗口',
