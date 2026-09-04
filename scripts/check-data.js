@@ -1,4 +1,4 @@
-// 一次性校验脚本：核对 18 个条目的必填字段与 related 指向
+// 校验脚本：核对全部条目的必填字段、related 指向、配图与出处
 // 用法：node scripts/check-data.js
 
 const fs = require('fs');
@@ -6,7 +6,7 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const window = {};
-['people', 'villages', 'culture'].forEach((f) => {
+['people', 'villages', 'culture', 'present', 'future'].forEach((f) => {
   const src = fs.readFileSync(path.join(root, 'assets/data', f + '.js'), 'utf8');
   new Function('window', src)(window);
 });
@@ -14,8 +14,13 @@ const window = {};
 const REG = {
   people: window.WY_PEOPLE,
   villages: window.WY_VILLAGES,
-  culture: window.WY_CULTURE
+  culture: window.WY_CULTURE,
+  present: window.WY_PRESENT,
+  future: window.WY_FUTURE
 };
+
+// 这两类做当期事实陈述，必须给出处
+const NEED_SOURCES = ['present', 'future'];
 
 const ids = [];
 Object.entries(REG).forEach(([cat, bucket]) => {
@@ -72,6 +77,16 @@ ids.forEach((id) => {
       if (a === b || a.includes(b) || b.includes(a)) {
         problems.push(`${id}: heroCap 与 lede 重复 → ${e.heroCap}`);
       }
+    }
+  }
+
+  if (NEED_SOURCES.includes(cat)) {
+    if (!Array.isArray(e.sources) || !e.sources.length) {
+      problems.push(`${id}: 该分类做当期事实陈述，必须给出 sources 出处`);
+    } else {
+      e.sources.forEach((s, i) => {
+        if (!s || !String(s).trim()) problems.push(`${id}: sources[${i}] 为空`);
+      });
     }
   }
 });

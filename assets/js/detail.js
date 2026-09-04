@@ -3,7 +3,9 @@
 const CATEGORIES = {
   people:   { data: window.WY_PEOPLE,   juan: '卷三 · 人物村居', anchor: 'index.html#ren' },
   villages: { data: window.WY_VILLAGES, juan: '卷三 · 人物村居', anchor: 'index.html#ren' },
-  culture:  { data: window.WY_CULTURE,  juan: '卷二 · 文华物候', anchor: 'index.html#wen' }
+  culture:  { data: window.WY_CULTURE,  juan: '卷二 · 文华物候', anchor: 'index.html#wen' },
+  present:  { data: window.WY_PRESENT,  juan: '卷六 · 今日之县', anchor: 'index.html#jin' },
+  future:   { data: window.WY_FUTURE,   juan: '卷七 · 未来之问', anchor: 'index.html#lai' }
 };
 
 const ORDINALS = ['壹', '貳', '叄', '肆', '伍', '陸', '柒', '捌'];
@@ -91,6 +93,14 @@ function renderRelated(related) {
   ]);
 }
 
+function renderSources(sources) {
+  if (!sources || !sources.length) return null;
+  return el('div', { class: 'panel' }, [
+    el('h2', { class: 'panel__t', text: '出处' }),
+    el('ul', { class: 'sources' }, sources.map((s) => el('li', { text: s })))
+  ]);
+}
+
 function renderNav(category, slug) {
   const nav = document.getElementById('topbarNav');
   const keys = Object.keys(CATEGORIES[category].data);
@@ -148,7 +158,8 @@ function renderEntry(hit) {
     ]),
     el('aside', { class: 'entry__side' }, [
       renderFacts(entry.facts),
-      renderRelated(entry.related)
+      renderRelated(entry.related),
+      renderSources(entry.sources)
     ])
   ]);
 
