@@ -3,6 +3,38 @@
    宣纸 / 墨 / 朱砂 / 远山青
    ============================================================ */
 
+/* ------------------------------------------------------------
+   自托管字体（子集化，见 scripts/build-fonts.py）
+
+   不走 Google Fonts 的缘故：手机端常常加载不到，一旦失败就退回
+   系统字体，而宋体、楷体只存在于苹果系统，安卓上会整站掉成黑体。
+   自托管才能让所有人看到同一套字。字体名沿用真实名称——@font-face
+   的声明优先于同名的本机字体，所以下方字体栈照旧可用。
+
+   改过文案后须重跑 build-fonts.py，否则新增的生僻字会缺字形。
+   ------------------------------------------------------------ */
+@font-face{
+  font-family:"Noto Serif SC";
+  src:url("../fonts/NotoSerifSC-subset.woff2") format("woff2");
+  font-weight:400 700;                /* 可变字重，一个文件覆盖正文到标题 */
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"LXGW WenKai";          /* 题跋、引文的楷体，安卓也能看到 */
+  src:url("../fonts/LXGWWenKai-subset.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Ma Shan Zheng";        /* 仅序诗、四季序号、舆地小标题三处 */
+  src:url("../fonts/MaShanZheng-subset.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
   --paper:        #f0e9db;
   --paper-warm:   #e9dfcc;
@@ -18,7 +50,7 @@
 
   --serif: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC",
            "SimSun", "Georgia", serif;
-  --kai:   "Kaiti SC", "STKaiti", "KaiTi", var(--serif);
+  --kai:   "LXGW WenKai", "Kaiti SC", "STKaiti", "KaiTi", var(--serif);
   --hand:  "Ma Shan Zheng", var(--kai);
 
   --gut: clamp(1.5rem, 5vw, 6rem);
@@ -27,7 +59,12 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 
-html{ scroll-behavior:smooth; }
+html{
+  scroll-behavior:smooth;
+  /* iOS Safari 会自作主张放大正文，关掉才能与桌面保持同一比例 */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
 
 body{
   margin:0;
