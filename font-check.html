@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>字体自检 · 徽州婺源</title>
+<!-- 刻意引用与正文页完全相同的样式表，这样测到的就是真实情形 -->
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  body{ padding:1.2rem; line-height:1.7; }
+  h1{ font-size:1.2rem; margin:0 0 1rem; }
+  h2{ font-size:.95rem; margin:1.6rem 0 .5rem; color:var(--cinnabar); }
+  #out{ font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.78rem;
+        white-space:pre-wrap; word-break:break-all; line-height:1.6;
+        background:rgba(255,255,255,.5); padding:.8rem; border:1px solid var(--paper-deep); }
+  .verdict{ font-size:1rem; font-weight:700; padding:.7rem .9rem; margin:.9rem 0;
+            border-left:3px solid var(--cinnabar); background:rgba(255,255,255,.5); }
+  .sample{ margin:.5rem 0; padding:.6rem .7rem; border:1px solid var(--paper-deep); }
+  .sample b{ display:block; font-size:.7rem; letter-spacing:.1em; color:var(--ink-faint);
+             font-weight:400; margin-bottom:.2rem; font-family:ui-monospace,monospace; }
+  .sample p{ margin:0; font-size:1.35rem; }
+  .s-noto{ font-family:"Noto Serif SC",serif; }
+  .s-kai { font-family:"LXGW WenKai",serif; }
+  .s-hand{ font-family:"Ma Shan Zheng",serif; }
+  .s-sys { font-family:"Songti SC","SimSun",serif; }
+  .s-sans{ font-family:sans-serif; }
+  button{ font:inherit; padding:.5rem .9rem; margin-top:.6rem;
+          background:var(--cinnabar); color:#f6efe2; border:0; }
+</style>
+</head>
+<body>
+
+<h1>字体自检</h1>
+<p style="font-size:.85rem;color:var(--ink-mid);margin-top:0">
+  这一页用与正文页相同的样式表，检测三款自托管字体在你这台设备上是否真的生效。
+  把下面「结论」和「明细」的内容截图发回即可。
+</p>
+
+<div id="verdict" class="verdict">检测中……</div>
+
+<h2>字样对照</h2>
+<div class="sample s-noto"><b>1 · Noto Serif SC（正文）</b><p>婺源，徽州东南隅 Hamburgefonstiv 2015</p></div>
+<div class="sample s-kai"><b>2 · 霞鹜文楷（题跋）</b><p>婺源，徽州东南隅 Hamburgefonstiv 2015</p></div>
+<div class="sample s-hand"><b>3 · Ma Shan Zheng（手写）</b><p>一生痴绝处 无梦到徽州</p></div>
+<div class="sample s-sys"><b>4 · 系统宋体（对照，非自托管）</b><p>婺源，徽州东南隅 Hamburgefonstiv 2015</p></div>
+<div class="sample s-sans"><b>5 · 系统黑体（对照，非自托管）</b><p>婺源，徽州东南隅 Hamburgefonstiv 2015</p></div>
+
+<h2>明细</h2>
+<div id="out">检测中……</div>
+<button onclick="copyAll()">复制全部明细</button>
+
+<script>
+// 用拉丁串量宽度来判断字体是否真的生效：汉字在这些字体里都是等宽全角，
+// 量汉字得到的宽度全都相同，区分不出来，必须用拉丁字符。
+var PROBE = 'Hamburgefonstiv 2015';
+var FAMILIES = {
+  'Noto Serif SC': '正文',
+  'LXGW WenKai': '题跋楷体',
+  'Ma Shan Zheng': '手写体',
+  'Songti SC': '系统宋体（对照）',
+  'monospace': '等宽（对照）',
+  'sans-serif': '无衬线（对照）'
+};
+
+function measure(family){
+  var s = document.createElement('span');
+  s.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:100px';
+  s.style.fontFamily = family === 'monospace' || family === 'sans-serif'
+      ? family : '"' + family + '"';
+  s.textContent = PROBE;
+  document.body.appendChild(s);
+  var w = Math.round(s.getBoundingClientRect().width * 100) / 100;
+  s.remove();
+  return w;
+}
+
+function run(){
+  var lines = [];
+  lines.push('时间 ' + new Date().toLocaleString('zh-CN'));
+  lines.push('地址 ' + location.href);
+  lines.push('UA  ' + navigator.userAgent);
+  lines.push('屏幕 ' + window.innerWidth + '×' + window.innerHeight +
+             '  像素比 ' + (window.devicePixelRatio || '?'));
+  lines.push('');
+
+  // 一、@font-face 是否加载成功
+  lines.push('【@font-face 状态】');
+  var faces = {};
+  if (document.fonts && document.fonts.forEach) {
+    document.fonts.forEach(function(f){ faces[f.family] = f.status; });
+  }
+  ['Noto Serif SC','LXGW WenKai','Ma Shan Zheng'].forEach(function(n){
+    lines.push('  ' + n + ' → ' + (faces[n] || '未注册'));
+  });
+  lines.push('');
+
+  // 二、实测宽度。自托管字体若与系统宋体同宽，说明其实没生效
+  lines.push('【拉丁串实测宽度 @100px】');
+  var w = {};
+  Object.keys(FAMILIES).forEach(function(f){
+    w[f] = measure(f);
+    lines.push('  ' + (f + '                    ').slice(0,18) + w[f] +
+               '   ' + FAMILIES[f]);
+  });
+  lines.push('');
+
+  // 三、正文实际采用的字体
+  var bodyFam = getComputedStyle(document.body).fontFamily;
+  lines.push('【body 字体栈】');
+  lines.push('  ' + bodyFam);
+  lines.push('');
+  lines.push('【woff2 支持】' +
+    (window.FontFace ? 'FontFace API 可用' : 'FontFace API 不可用'));
+
+  document.getElementById('out').textContent = lines.join('\n');
+
+  // 判定：三款自托管字体两两不同宽，且都不等于系统宋体，才算真的生效
+  var mine = [w['Noto Serif SC'], w['LXGW WenKai'], w['Ma Shan Zheng']];
+  var uniq = mine.filter(function(v,i){ return mine.indexOf(v) === i; }).length;
+  var sameAsSystem = mine.filter(function(v){ return v === w['Songti SC']; }).length;
+  var allLoaded = ['Noto Serif SC','LXGW WenKai','Ma Shan Zheng']
+        .every(function(n){ return faces[n] === 'loaded'; });
+
+  var v = document.getElementById('verdict');
+  if (allLoaded && uniq === 3 && sameAsSystem === 0) {
+    v.textContent = '✓ 三款自托管字体已生效，这台设备看到的应与电脑一致。';
+  } else if (!allLoaded) {
+    v.textContent = '✗ 字体未加载成功（状态见明细）。可能是网络被拦、缓存了旧页面，'
+                  + '或此浏览器不加载中文 webfont。';
+  } else if (sameAsSystem > 0 || uniq < 3) {
+    v.textContent = '✗ 字体虽已下载，但渲染时被替换成了系统字体——'
+                  + '多见于内置浏览器强行套用自家字体。请换系统浏览器再试。';
+  }
+}
+
+function copyAll(){
+  var t = document.getElementById('verdict').textContent + '\n\n' +
+          document.getElementById('out').textContent;
+  if (navigator.clipboard) navigator.clipboard.writeText(t);
+}
+
+// 等字体加载完再测，否则会误判成未生效
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(run);
+  setTimeout(run, 6000);   // 兜底：字体迟迟不来也要出结果
+} else {
+  setTimeout(run, 3000);
+}
+</script>
+
+</body>
+</html>
