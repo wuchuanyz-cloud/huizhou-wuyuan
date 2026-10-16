@@ -15,7 +15,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 reveals.forEach((el) => revealObserver.observe(el));
 
 // 同组元素依次显影
-document.querySelectorAll('.timeline, .cards, .seasons, .villages__grid, .figures, .geo, .people')
+document.querySelectorAll('.timeline, .cards, .seasons, .menu, .villages__grid, .figures, .geo, .people')
   .forEach((group) => {
     [...group.querySelectorAll('.reveal')].forEach((el, i) => {
       el.style.setProperty('--d', `${Math.min(i, 6) * 0.09}s`);

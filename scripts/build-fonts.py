@@ -51,11 +51,12 @@ FONTS = [
     },
 ]
 
-# --hand 手写体只作用于这三类元素（见 styles.css 的 .verse / .season__ord / .geo__col h4）
+# --hand 手写体作用于这些元素（见 styles.css 的 .verse / .season__ord / .geo__col h4 / .se__c）
 HAND_PATTERNS = [
     r'<[^>]*class="[^"]*\bverse\b[^"]*"[^>]*>(.*?)</(?:div|blockquote|section)>',
     r'<[^>]*class="[^"]*\bseason__ord\b[^"]*"[^>]*>(.*?)</span>',
     r'<[^>]*class="[^"]*\bgeo__col\b[^"]*"[^>]*>\s*<h4[^>]*>(.*?)</h4>',
+    r'<b[^>]*class="[^"]*\bse__c\b[^"]*"[^>]*>(.*?)</b>',
 ]
 
 CJK = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")

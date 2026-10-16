@@ -6,7 +6,7 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const window = {};
-['people', 'villages', 'culture', 'present', 'future'].forEach((f) => {
+['people', 'villages', 'culture', 'food', 'present', 'future'].forEach((f) => {
   const src = fs.readFileSync(path.join(root, 'assets/data', f + '.js'), 'utf8');
   new Function('window', src)(window);
 });
@@ -15,12 +15,13 @@ const REG = {
   people: window.WY_PEOPLE,
   villages: window.WY_VILLAGES,
   culture: window.WY_CULTURE,
+  food: window.WY_FOOD,
   present: window.WY_PRESENT,
   future: window.WY_FUTURE
 };
 
-// 这两类做当期事实陈述，必须给出处
-const NEED_SOURCES = ['present', 'future'];
+// 当期事实与取自报道的做法，必须给出处
+const NEED_SOURCES = ['food', 'present', 'future'];
 
 const ids = [];
 Object.entries(REG).forEach(([cat, bucket]) => {

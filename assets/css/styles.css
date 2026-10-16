@@ -506,7 +506,95 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 .rare p{ color:var(--ink-soft); font-size:.96rem; }
 
 /* ============================================================
-   卷五 地理
+   卷五 饮馔
+   ============================================================ */
+.chapter--yin{ background:var(--paper); }
+
+.menu{
+  display:grid; grid-template-columns:1fr;
+  column-gap:clamp(2rem,5vw,4.5rem);
+  border-top:1px solid var(--paper-deep);
+}
+@media (min-width:760px){ .menu{ grid-template-columns:repeat(2,1fr); } }
+
+.dish{
+  position:relative; display:flex; align-items:flex-start;
+  gap:clamp(1rem,2vw,1.4rem);
+  padding:clamp(1.4rem,2.6vw,1.9rem) 0;
+  border-bottom:1px dotted var(--ink-faint);
+  color:inherit;
+}
+/* 手法印：一枚朱砂小印，标出这道菜是蒸、是糊还是粿 */
+.dish__tag{
+  flex:none; display:grid; place-content:center;
+  width:2.1rem; height:2.1rem; margin-top:.15rem;
+  border:1px solid var(--cinnabar); border-radius:2px;
+  color:var(--cinnabar); font-size:.95rem; line-height:1;
+  transition:background .45s var(--ease), color .45s var(--ease);
+}
+.dish:hover .dish__tag,
+.dish:focus-visible .dish__tag{ background:var(--cinnabar); color:var(--paper); }
+.dish__body{ flex:1; min-width:0; padding-right:2.6rem; }
+.dish h3{
+  font-size:1.2rem; letter-spacing:.2em; margin-bottom:.5rem;
+  transition:color .4s var(--ease);
+}
+.dish:hover h3{ color:var(--cinnabar); }
+.dish p{ font-size:.92rem; color:var(--ink-soft); }
+.dish::after{
+  content:'阅 →';
+  position:absolute; right:0; top:clamp(1.6rem,2.8vw,2.1rem);
+  font-size:.66rem; letter-spacing:.22em; color:var(--cinnabar);
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .4s var(--ease), transform .4s var(--ease);
+}
+.dish:hover::after,
+.dish:focus-visible::after{ opacity:1; transform:none; }
+
+.sise{ margin-top:clamp(3rem,7vh,5rem); }
+.sise__t{
+  font-size:1.1rem; letter-spacing:.34em; color:var(--ink-mid);
+  text-align:center; margin-bottom:2rem;
+}
+.sise__t::after{
+  content:""; display:block; width:34px; height:1px;
+  background:var(--cinnabar); margin:1rem auto 0;
+}
+.sise__row{
+  display:grid; gap:1px;
+  grid-template-columns:repeat(2,1fr);
+  background:var(--paper-deep); border:1px solid var(--paper-deep);
+}
+@media (min-width:700px){ .sise__row{ grid-template-columns:repeat(4,1fr); } }
+.se{
+  display:flex; flex-direction:column; align-items:center; gap:.9rem;
+  padding:clamp(1.6rem,3vw,2.2rem) 1rem;
+  background:var(--paper-warm); color:inherit;
+  transition:background .5s var(--ease);
+}
+a.se:hover{ background:var(--paper); }
+.se__c{
+  display:grid; place-content:center;
+  width:3.4rem; height:3.4rem; border-radius:50%;
+  font-family:var(--hand); font-weight:400; font-size:1.9rem; line-height:1;
+  color:var(--paper);
+  transition:transform .5s var(--ease);
+}
+a.se:hover .se__c{ transform:translateY(-3px); }
+.se span{ font-size:.86rem; letter-spacing:.2em; color:var(--ink-soft); }
+a.se:hover span{ color:var(--cinnabar); }
+.se--red   .se__c{ background:var(--cinnabar); }
+.se--green .se__c{ background:var(--celadon); }
+.se--black .se__c{ background:var(--ink); }
+.se--white .se__c{
+  background:#f8f4ea; color:var(--ink-mid);
+  box-shadow:inset 0 0 0 1px var(--paper-deep);
+}
+
+.datanote--end{ margin:clamp(2.4rem,5vh,3.4rem) 0 0; }
+
+/* ============================================================
+   卷六 地理
    ============================================================ */
 .figures{
   display:grid; gap:clamp(1.6rem,3vw,2.4rem);
@@ -561,6 +649,7 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 .js .reveal.is-in{ opacity:1; transform:none; }
 .timeline .reveal.is-in,
 .cards .reveal.is-in,
+.menu .reveal.is-in,
 .seasons .reveal.is-in{ transition-delay:var(--d,0s); }
 
 @media (prefers-reduced-motion:reduce){
@@ -616,7 +705,7 @@ ol,ul{ margin:0; padding:0; list-style:none; }
 .vil:hover b{ color:var(--cinnabar); }
 
 /* ============================================================
-   卷六 今日 · 卷七 未来
+   卷七 今日 · 卷八 未来
    ============================================================ */
 .chapter--jin{ background:var(--paper-warm); }
 .chapter--lai{ background:linear-gradient(180deg,var(--paper),var(--paper-warm)); }
